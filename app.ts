@@ -52,13 +52,6 @@ function createAdManagerUserHandler(): AdManagerUserHandler {
     'gam_user_list',
     networkCode,
     apiVersion,
-    /* copybara:strip_begin(Provides ICS access) */
-    {
-      'Is-Internal-User': String(
-        Session.getActiveUser().getEmail().endsWith('@google.com'),
-      ),
-    },
-    /* copybara:strip_end */
   );
   const userService = adManagerClient.getService('UserService');
   return new AdManagerUserHandler(userService);
@@ -115,5 +108,5 @@ export function onOpen(spreadsheetHandler = getSpreadsheetHandler()) {
   ]);
 }
 
-goog.exportSymbol('compiledOnOpen', onOpen);
+
 
