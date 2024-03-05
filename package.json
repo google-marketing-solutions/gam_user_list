@@ -1,0 +1,24 @@
+{
+  "name": "gam_user_list",
+  "version": "1.0.0",
+  "description": "Apps Script tool to export GAM network users to Google Sheets.",
+  "main": "./app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "deploy": "webpack && clasp push"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.82",
+    "gam_apps_script": "github:google-marketing-solutions/gam_apps_script",
+    "gas-webpack-plugin": "^2.5.0"
+  }
+}
