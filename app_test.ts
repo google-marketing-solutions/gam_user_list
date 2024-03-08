@@ -18,7 +18,7 @@
 import 'jasmine';
 
 import {AdManagerUserHandler, User} from './ad_manager_user_handler';
-import {onExportUsersSelected, onOpen} from './app';
+import {createMenu, onExportUsersSelected} from './app';
 import {SpreadsheetHandler} from './spreadsheet_handler';
 
 const TEST_USERS: User[] = [
@@ -45,14 +45,14 @@ const OUTPUT_VALUES_FOR_TEST_USERS = [
 ];
 
 describe('App', () => {
-  describe('onOpen', () => {
+  describe('createMenu', () => {
     it('creates a menu called "Ad Manager" with an item called "Export users"', () => {
       const spreadsheetHandler: SpreadsheetHandler = jasmine.createSpyObj(
         'SpreadsheetHandler',
         ['createMenu'],
       );
 
-      onOpen(spreadsheetHandler);
+      createMenu(spreadsheetHandler);
 
       expect(spreadsheetHandler.createMenu).toHaveBeenCalledWith('Ad Manager', [
         {

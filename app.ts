@@ -99,14 +99,24 @@ export function onExportUsersSelected(
 }
 
 /**
- * Creates a menu entry in the Google Sheets UI when the spreadsheet is opened.
+ * Creates a menu entry in the Google Sheets UI.
  * @param spreadsheetHandler The spreadsheet handler.
  */
-export function onOpen(spreadsheetHandler = getSpreadsheetHandler()) {
+export function createMenu(spreadsheetHandler: SpreadsheetHandler) {
   spreadsheetHandler.createMenu('Ad Manager', [
     {itemName: 'Export users', functionName: 'onExportUsersSelected'},
   ]);
 }
+
+/**
+ * Main entry point for the app. Triggered when the spreadsheet is opened.
+ */
+export function onOpen() {
+  const spreadsheetHandler = getSpreadsheetHandler();
+  createMenu(spreadsheetHandler);
+}
+
+global.onOpen = onOpen;
 
 
 
