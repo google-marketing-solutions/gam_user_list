@@ -44,9 +44,11 @@ interface UserPage {
  */
 export class AdManagerUserHandler {
   readonly networkCode: string;
+  readonly apiVersion: string
 
   constructor(private readonly userService: AdManagerService) {
     this.networkCode = String(userService.networkCode);
+    this.apiVersion = String(userService.apiVersion);
   }
 
   /**
