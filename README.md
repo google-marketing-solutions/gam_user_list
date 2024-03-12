@@ -38,6 +38,20 @@ version that should be used (eg. v0000 - use the latest from
 * Create a sheet called "USER_LIST_TEMPLATE". This will be copied and used as a
 template for the exported data. Use this to create custom formatting. 
 
+## Usage
+
+If the project has been deployed and configured correctly, a new menu item
+called ```Ad Manager``` will appear a few seconds after opening the container
+Spreadsheet.
+
+To export a list of users for the currently configured network, select
+```Ad Manager > Export Users```.
+
+Although only users with access to the Ad Manager network will be able to export
+new data, please be aware that the exported data will be visible to anyone with
+access to the Google Sheets file regardless of whether or not they have access
+to the data in Google Ad Manager.
+
 ## Disclaimer
 
 This is not an officially supported Google product. The code samples shared

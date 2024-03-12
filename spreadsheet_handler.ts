@@ -63,6 +63,21 @@ export class SpreadsheetHandler {
   }
 
   /**
+   * Shows a Yes/No prompt to the user.
+   * @param title The title of the dialog.
+   * @param prompt The prompt of the dialog.
+   * @return True if the user clicked Yes, false otherwise.
+   */
+  showYesNoDialog(
+      title: string,
+      prompt: string,
+      ): boolean {
+    const yesNoButtonSet = this.userInterface.ButtonSet.YES_NO
+    const result = this.userInterface.alert(title, prompt, yesNoButtonSet);
+    return (result == this.userInterface.Button.YES)
+  }
+
+  /**
    * Gets the value from a named range in the container Spreadsheet. If the
    * named range contains more than once cell, only the top-left most value
    * is returned.

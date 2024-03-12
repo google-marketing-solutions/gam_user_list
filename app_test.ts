@@ -18,7 +18,7 @@
 import 'jasmine';
 
 import {AdManagerUserHandler, User} from './ad_manager_user_handler';
-import {createMenu, onExportUsersSelected} from './app';
+import {createMenu, exportUsers} from './app';
 import {SpreadsheetHandler} from './spreadsheet_handler';
 
 const TEST_USERS: User[] = [
@@ -63,7 +63,7 @@ describe('App', () => {
     });
   });
 
-  describe('onExportUsersSelected', () => {
+  describe('exportUsers', () => {
     it('creates a new sheet with the correct name and values', () => {
       const spreadsheetHandler = jasmine.createSpyObj<SpreadsheetHandler>(
         'SpreadsheetHandler',
@@ -76,7 +76,7 @@ describe('App', () => {
       );
       userHandler.getAllUsers.and.returnValue(TEST_USERS);
 
-      onExportUsersSelected(spreadsheetHandler, userHandler, 'DATE_STRING');
+      exportUsers(spreadsheetHandler, userHandler, 'DATE_STRING');
 
       expect(spreadsheetHandler.createSheetFromTemplate).toHaveBeenCalledWith(
         '[DATE_STRING] Network code: NETWORK_CODE',
@@ -107,7 +107,7 @@ describe('App', () => {
       );
       userHandler.getAllUsers.and.returnValue(TEST_USERS);
 
-      onExportUsersSelected(spreadsheetHandler, userHandler, 'DATE_STRING');
+      exportUsers(spreadsheetHandler, userHandler, 'DATE_STRING');
 
       expect(spreadsheetHandler.createSheetFromTemplate).toHaveBeenCalledWith(
         '[DATE_STRING] Network code: NETWORK_CODE (2)',

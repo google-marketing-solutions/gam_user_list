@@ -39,14 +39,8 @@ function getSpreadsheetHandler(): SpreadsheetHandler {
   return spreadsheetHandler;
 }
 
-function createAdManagerUserHandler(): AdManagerUserHandler {
-  const spreadsheetHandler = getSpreadsheetHandler();
-  const networkCode = spreadsheetHandler.getValueFromNamedRangeOrThrow(
-    NAMED_RANGE_NETWORK_CODE,
-  );
-  const apiVersion = spreadsheetHandler.getValueFromNamedRangeOrThrow(
-    NAMED_RANGE_API_VERSION,
-  );
+function createAdManagerUserHandler(
+    networkCode: string, apiVersion: string): AdManagerUserHandler {
   const adManagerClient = new AdManagerClient(
     ScriptApp.getOAuthToken(),
     'gam_user_list',
@@ -63,10 +57,10 @@ function createAdManagerUserHandler(): AdManagerUserHandler {
  * @param userHandler The Ad Manager user handler.
  * @param dateString The current date as a string.
  */
-export function onExportUsersSelected(
-  spreadsheetHandler = getSpreadsheetHandler(),
-  userHandler = createAdManagerUserHandler(),
-  dateString = Utilities.formatDate(new Date(), 'GMT+0', 'M/d/yy'),
+export function exportUsers(
+    spreadsheetHandler: SpreadsheetHandler,
+    userHandler: AdManagerUserHandler,
+    dateString: string,
 ) {
   // export users
   const users = userHandler.getAllUsers();
@@ -96,6 +90,29 @@ export function onExportUsersSelected(
       attempt++;
     }
   }
+}
+
+export function onExportUsersSelected() {
+  const spreadsheetHandler = getSpreadsheetHandler();
+  const networkCode = spreadsheetHandler.getValueFromNamedRangeOrThrow(
+      NAMED_RANGE_NETWORK_CODE,
+  );
+  const didUserConfirm = spreadsheetHandler.showYesNoDialog(
+      `Export users`,
+      `Network code: ${networkCode}\n\n` +
+          'Please be aware that exported data will be visible to anyone with ' +
+          'access to this Google Sheets file regardless of whether or not ' +
+          'they have access to the data within Google Ad Manager. Do you wish' +
+          ' to continue?',
+  );
+  if (!didUserConfirm) return;
+
+  const apiVersion = spreadsheetHandler.getValueFromNamedRangeOrThrow(
+      NAMED_RANGE_API_VERSION,
+  );
+  const userHandler = createAdManagerUserHandler(networkCode, apiVersion);
+  const dateString = Utilities.formatDate(new Date(), 'GMT+0', 'M/d/yy');
+  exportUsers(spreadsheetHandler, userHandler, dateString);
 }
 
 /**
