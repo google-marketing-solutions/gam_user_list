@@ -8,6 +8,12 @@ access to the GAM network will be able to export the data.
 
 ## Deploy
 
+To get your own copy of this solution, make a copy of this
+[Google Sheet](https://docs.google.com/spreadsheets/d/1ePO_k-CViE1xP1whPl-5K9pWZs8KgL4t5ZxY_fCOpzs/edit#gid=1907979383)
+and follow the included setup instructions.
+
+## Deploy manually
+
 Install dependencies with npm:
 
 ```sh
